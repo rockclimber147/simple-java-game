@@ -1,3 +1,5 @@
+package input;
+
 import javax.swing.event.MouseInputListener;
 import javax.swing.SwingUtilities;
 import java.awt.event.MouseEvent;
@@ -5,7 +7,7 @@ import java.awt.event.MouseEvent;
 public class MouseInputHandler implements MouseInputListener {
     MouseInputState mouseState;
 
-    MouseInputHandler(MouseInputState mouseState) {
+    public MouseInputHandler(MouseInputState mouseState) {
         this.mouseState = mouseState;
     }
     @Override

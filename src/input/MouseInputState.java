@@ -1,3 +1,5 @@
+package input;
+
 public class MouseInputState {
     public boolean leftMousePressed = false;
     public boolean rightMousePressed = false;
