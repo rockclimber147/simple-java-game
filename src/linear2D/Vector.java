@@ -17,8 +17,10 @@ public class Vector {
     }
 
     public void applyMatrix(Matrix m){
-        this.x = m.a*x + m.b*y;
-        this.y = m.c*x + m.d*y;
+        float newX = m.a*x + m.b*y;
+        float newY = m.c*x + m.d*y;
+        this.x = newX;
+        this.y = newY;
     }
 
     public void scale(float magnitude){
@@ -41,5 +43,13 @@ public class Vector {
 
     public void setY(float y) {
         this.y = y;
+    }
+
+    public String toString(){
+        return "x: " + x + "\ny: " + y + "\nlength: " + length;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Vector(1,1));
     }
 }
