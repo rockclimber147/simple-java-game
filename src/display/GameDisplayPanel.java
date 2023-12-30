@@ -1,5 +1,7 @@
 package display;
 
+import gameEntities.EntityPlayer;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,8 +9,9 @@ public class GameDisplayPanel extends JPanel{
     // Screen Settings
     private final int screenWidth = 1080;
     private final int screenHeight = 640;
-
-    public GameDisplayPanel() {
+    private EntityPlayer player;
+    public GameDisplayPanel(EntityPlayer player) {
+        this.player = player;
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
@@ -20,6 +23,7 @@ public class GameDisplayPanel extends JPanel{
         Graphics2D g2 = (Graphics2D) g;
 
         g2.setColor(Color.white);
+        player.draw(g2);
 
         g2.dispose();
     }

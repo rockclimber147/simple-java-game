@@ -1,19 +1,23 @@
 package linear2D;
 
 public class Vector {
-    protected float x;
-    protected float y;
+    public float x;
+    public float y;
     protected float length;
 
     public Vector(float x, float y){
         this.x = x;
         this.y = y;
+        updateLength();
+    }
+    public void updateLength(){
         this.length = (float) (Math.sqrt(x*x + y*y));
     }
 
     public void addWithVector(Vector v){
         this.x += v.x;
         this.y += v.y;
+        updateLength();
     }
 
     public void applyMatrix(Matrix m){

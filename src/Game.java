@@ -1,5 +1,6 @@
 import display.GameDisplayPanel;
 import display.GameWindow;
+import gameEntities.EntityPlayer;
 import input.MouseInputHandler;
 import input.MouseInputState;
 
@@ -12,11 +13,15 @@ public class Game implements Runnable{
     private final GameWindow window;
     private final GameDisplayPanel gameDisplayPanel;
 
+    private final EntityPlayer player;
+
 
     public Game(){
         this.mouseInputState = new MouseInputState();
+        this.player = new EntityPlayer(mouseInputState);
         this.window = new GameWindow();
-        this.gameDisplayPanel = new GameDisplayPanel();
+        this.gameDisplayPanel = new GameDisplayPanel(this.player);
+
         MouseInputHandler mouseInputHandler = new MouseInputHandler(mouseInputState);
         window.add(gameDisplayPanel);
         window.pack();
@@ -57,6 +62,6 @@ public class Game implements Runnable{
     }
 
     private void update() {
-
+        player.update();
     }
 }

@@ -21,8 +21,8 @@ public class VectorMath {
     }
 
     public static void main(String[] args) {
-        Vector v1 = new Vector(1,0);
-        float angle = getAngleBetweenTwoVectors(v1, new Vector(0, 1));
+        Vector v1 = new Vector(1,1);
+        float angle = getAngleBetweenTwoVectors(v1, new Vector(1, -1));
         System.out.println("In degrees: " + Math.toDegrees(angle));
         Matrix r = getRotationMatrixFromAngle(angle);
         System.out.println("A: " + r.a + " B: " + r.b + " C: " + r.c + " D: " + r.d);
