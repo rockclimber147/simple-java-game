@@ -47,13 +47,11 @@ public class MouseInputHandler implements MouseInputListener {
     public void mouseDragged(MouseEvent e) {
         mouseState.mouseX = e.getX();
         mouseState.mouseY = e.getY();
-        System.out.println("MOUSE IS MOVING");
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
         mouseState.mouseX = e.getX();
         mouseState.mouseY = e.getY();
-        System.out.println("MOUSE IS MOVING");
     }
 }

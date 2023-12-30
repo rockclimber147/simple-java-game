@@ -1,8 +1,8 @@
 package linear2D;
 
 public class Vector {
-    public float x;
-    public float y;
+    protected float x;
+    protected float y;
     protected float length;
 
     public Vector(float x, float y){
@@ -27,19 +27,32 @@ public class Vector {
         this.y = newY;
     }
 
-    public void scale(float magnitude){
+    public void scaleBy(float magnitude){
         this.x *= magnitude;
         this.y *= magnitude;
         this.length *= magnitude;
+    }
+    public void scaleTo(float desiredLength){
+        float factor = desiredLength / length;
+        scaleBy(factor);
+    }
+    public void changeX(float change){
+        this.x += change;
+    }
+    public void changeY(float change){
+        this.y += change;
     }
 
     public float getX() {
         return x;
     }
+    public float getUnitX(){return x / length;}
 
     public float getY() {
         return y;
     }
+    public float getUnitY(){return y / length;}
+    public float getLength(){return length;}
 
     public void setX(float x) {
         this.x = x;

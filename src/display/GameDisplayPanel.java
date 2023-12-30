@@ -1,6 +1,7 @@
 package display;
 
 import gameEntities.EntityPlayer;
+import linear2D.Vector;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,8 +25,13 @@ public class GameDisplayPanel extends JPanel{
 
         g2.setColor(Color.white);
         player.draw(g2);
-
+        paintDebugInfo(g2);
         g2.dispose();
+    }
+
+    private void paintDebugInfo(Graphics2D g2){
+        Vector playerPosition = player.getPosition();
+        g2.drawString(player.toString(), playerPosition.getX(), playerPosition.getY());
     }
 
 }
