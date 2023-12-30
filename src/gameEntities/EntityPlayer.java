@@ -10,12 +10,12 @@ import java.awt.*;
 public class EntityPlayer implements EntityGeneric{
     private final MouseInputState input;
     private Vector position = new Vector(100,100);
-    private Vector direction = new Vector(10,0);
+    private Vector direction = new Vector(100,0);
     private Vector velocity = new Vector(1, 0);
-    private float maxRotationStep = 0.1f;
-    private float thrust = .50f;
-    private float terminalVelocity = 20.0f;
-    private float dragCoefficient = 0.99f;
+    private float maxRotationStep = 0.2f;
+    private float thrust = .90f;
+    private float terminalVelocity = 10.0f;
+    private float dragCoefficient = 0.97f;
     private Matrix clockwiseRotation;
     private Matrix counterClockwiseRotation;
 
@@ -50,8 +50,8 @@ public class EntityPlayer implements EntityGeneric{
             } else {
                 direction.applyMatrix(clockwiseRotation);
             }
-        } else if(Math.abs(playerMouseAngle) >= 0.01){
-            direction.applyMatrix(VectorMath.getRotationMatrixFromAngle(playerMouseAngle));
+        } else if(Math.abs(playerMouseAngle) >= 0.0001){
+            direction.applyMatrix(VectorMath.getRotationMatrixFromAngle(-playerMouseAngle));
         }
     }
     private void changeVelocity(){

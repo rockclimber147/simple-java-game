@@ -16,21 +16,8 @@ public class VectorMath {
     }
 
     public static float getAngleBetweenTwoVectors(Vector a, Vector b){
-//        return (float) Math.acos(getDotProduct(v1, v2) / (v1.length * v2.length));
         return (float) Math.atan2( a.x*b.y - a.y*b.x, a.x*b.x + a.y*b.y );
     }
 
-    public static void main(String[] args) {
-        Vector v1 = new Vector(1,1);
-        float angle = getAngleBetweenTwoVectors(v1, new Vector(1, -1));
-        System.out.println("In degrees: " + Math.toDegrees(angle));
-        Matrix r = getRotationMatrixFromAngle(angle);
-        System.out.println("A: " + r.a + " B: " + r.b + " C: " + r.c + " D: " + r.d);
-
-        System.out.println(v1);
-        v1.applyMatrix(r);
-        System.out.println(v1);
-        v1.applyMatrix(r);
-        System.out.println(v1);
-    }
+    public static void main(String[] args) {}
 }

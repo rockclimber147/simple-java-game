@@ -6,7 +6,7 @@ import input.MouseInputState;
 
 public class Game implements Runnable{
     public static int tickCount = 0;
-    private final int FPS = 30;
+    private final int FPS = 60;
 
     private Thread gameThread;
     private final MouseInputState mouseInputState;

@@ -25,7 +25,7 @@ public class GameDisplayPanel extends JPanel{
 
         g2.setColor(Color.white);
         player.draw(g2);
-        paintDebugInfo(g2);
+//        paintDebugInfo(g2);
         g2.dispose();
     }
 
