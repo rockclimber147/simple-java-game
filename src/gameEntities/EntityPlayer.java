@@ -7,10 +7,11 @@ import linear2D.VectorMath;
 
 import java.awt.*;
 
-public class EntityPlayer implements EntityGeneric{
+public class EntityPlayer implements Entity {
+    RegularPolygon body;
     private final MouseInputState input;
-    private Vector position = new Vector(100,100);
-    private Vector direction = new Vector(100,0);
+    private Vector position = new Vector(200,200);
+    private Vector direction;
     private Vector velocity = new Vector(1, 0);
     private float maxRotationStep = 0.2f;
     private float thrust = .90f;
@@ -23,10 +24,13 @@ public class EntityPlayer implements EntityGeneric{
         this.input = input;
         this.clockwiseRotation = VectorMath.getRotationMatrixFromAngle(maxRotationStep);
         this.counterClockwiseRotation = VectorMath.getRotationMatrixFromAngle(-maxRotationStep);
+        this.body = new RegularPolygon(position,20,10);
+        this.direction = body.vertices[0];
     }
     @Override
     public void draw(Graphics2D g2) {
         g2.drawLine((int) position.getX(), (int) position.getY(), (int) (position.getX() + direction.getX()), (int) (position.getY() + direction.getY()));
+        g2.drawPolygon(body.getDrawableVertices()[0], body.getDrawableVertices()[1], body.vertexCount);
     }
 
     @Override
@@ -39,19 +43,19 @@ public class EntityPlayer implements EntityGeneric{
         if (velocity.getLength() > terminalVelocity){
             velocity.scaleTo(terminalVelocity);
         }
-        position.addWithVector(velocity);
+        position.addVector(velocity);
     }
 
     private void rotate(){
-        float playerMouseAngle = VectorMath.getAngleBetweenTwoVectors(direction, new Vector(input.mouseX - position.getX(), input.mouseY - position.getY()));
+        float playerMouseAngle = VectorMath.getAngleBetweenTwoVectors(direction, VectorMath.getVectorDifference(input.mouseVector, position));
         if (Math.abs(playerMouseAngle) >= maxRotationStep){
             if (playerMouseAngle > 0){
-                direction.applyMatrix(counterClockwiseRotation);
+                body.applyMatrix(counterClockwiseRotation);
             } else {
-                direction.applyMatrix(clockwiseRotation);
+                body.applyMatrix(clockwiseRotation);
             }
-        } else if(Math.abs(playerMouseAngle) >= 0.0001){
-            direction.applyMatrix(VectorMath.getRotationMatrixFromAngle(-playerMouseAngle));
+        } else {
+            body.applyMatrix(VectorMath.getRotationMatrixFromAngle(-playerMouseAngle));
         }
     }
     private void changeVelocity(){

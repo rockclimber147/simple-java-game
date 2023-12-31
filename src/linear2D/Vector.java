@@ -14,9 +14,14 @@ public class Vector {
         this.length = (float) (Math.sqrt(x*x + y*y));
     }
 
-    public void addWithVector(Vector v){
+    public void addVector(Vector v){
         this.x += v.x;
         this.y += v.y;
+        updateLength();
+    }
+    public void subtractVector(Vector v){
+        this.x -= v.x;
+        this.y -= v.y;
         updateLength();
     }
 

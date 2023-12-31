@@ -45,13 +45,15 @@ public class MouseInputHandler implements MouseInputListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        mouseState.mouseX = e.getX();
-        mouseState.mouseY = e.getY();
+        setVectorFromMouseCoordinates(e);
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        mouseState.mouseX = e.getX();
-        mouseState.mouseY = e.getY();
+        setVectorFromMouseCoordinates(e);
+    }
+    private void setVectorFromMouseCoordinates(MouseEvent e){
+        mouseState.mouseVector.setX(e.getX());
+        mouseState.mouseVector.setY(e.getY());
     }
 }
