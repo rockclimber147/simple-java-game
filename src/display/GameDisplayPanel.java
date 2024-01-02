@@ -1,6 +1,6 @@
 package display;
 
-import gameEntities.EntityPlayer;
+import gameEntities.EntityPlayerShip;
 import linear2D.Vector;
 
 import javax.swing.*;
@@ -10,8 +10,8 @@ public class GameDisplayPanel extends JPanel{
     // Screen Settings
     private final int screenWidth = 1080;
     private final int screenHeight = 640;
-    private EntityPlayer player;
-    public GameDisplayPanel(EntityPlayer player) {
+    private EntityPlayerShip player;
+    public GameDisplayPanel(EntityPlayerShip player) {
         this.player = player;
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);

@@ -1,6 +1,6 @@
 import display.GameDisplayPanel;
 import display.GameWindow;
-import gameEntities.EntityPlayer;
+import gameEntities.EntityPlayerShip;
 import input.MouseInputHandler;
 import input.MouseInputState;
 
@@ -13,12 +13,12 @@ public class Game implements Runnable{
     private final GameWindow window;
     private final GameDisplayPanel gameDisplayPanel;
 
-    private final EntityPlayer player;
+    private final EntityPlayerShip player;
 
 
     public Game(){
         this.mouseInputState = new MouseInputState();
-        this.player = new EntityPlayer(mouseInputState);
+        this.player = new EntityPlayerShip(mouseInputState);
         this.window = new GameWindow();
         this.gameDisplayPanel = new GameDisplayPanel(this.player);
 

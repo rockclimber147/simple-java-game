@@ -7,12 +7,10 @@ import linear2D.VectorMath;
 
 import java.awt.*;
 
-public class EntityPlayer implements Entity {
-    RegularPolygon body;
+public class EntityPlayerShip extends EntityGeneric {
+    private RegularPolygon body;
     private final MouseInputState input;
-    private Vector position = new Vector(200,200);
-    private Vector direction;
-    private Vector velocity = new Vector(1, 0);
+    private final Vector direction;
     private float maxRotationStep = 0.2f;
     private float thrust = .90f;
     private float terminalVelocity = 10.0f;
@@ -20,55 +18,56 @@ public class EntityPlayer implements Entity {
     private Matrix clockwiseRotation;
     private Matrix counterClockwiseRotation;
 
-    public EntityPlayer(MouseInputState input){
+    public EntityPlayerShip(MouseInputState input){
         this.input = input;
         this.clockwiseRotation = VectorMath.getRotationMatrixFromAngle(maxRotationStep);
         this.counterClockwiseRotation = VectorMath.getRotationMatrixFromAngle(-maxRotationStep);
-        this.body = new RegularPolygon(position,20,10);
+        this.body = new RegularPolygon(position,collisionRadius,5);
         this.direction = body.vertices[0];
     }
     @Override
     public void draw(Graphics2D g2) {
+        super.draw(g2);
         g2.drawLine((int) position.getX(), (int) position.getY(), (int) (position.getX() + direction.getX()), (int) (position.getY() + direction.getY()));
         g2.drawPolygon(body.getDrawableVertices()[0], body.getDrawableVertices()[1], body.vertexCount);
     }
 
     @Override
     public void update() {
-        rotate();
+        rotate(input.mouseVector);
         if (input.rightMousePressed){
             changeVelocity();
         }
         applyDrag();
-        if (velocity.getLength() > terminalVelocity){
-            velocity.scaleTo(terminalVelocity);
+        if (currentVelocity.getLength() > terminalVelocity){
+            currentVelocity.scaleTo(terminalVelocity);
         }
-        position.addVector(velocity);
+        position.addVector(currentVelocity);
     }
 
-    private void rotate(){
-        float playerMouseAngle = VectorMath.getAngleBetweenTwoVectors(direction, VectorMath.getVectorDifference(input.mouseVector, position));
-        if (Math.abs(playerMouseAngle) >= maxRotationStep){
-            if (playerMouseAngle > 0){
+    private void rotate(Vector target){
+        float targetAngle = VectorMath.getAngleBetweenTwoVectors(direction, VectorMath.getVectorDifference(target, position));
+        if (Math.abs(targetAngle) >= maxRotationStep){
+            if (targetAngle > 0){
                 body.applyMatrix(counterClockwiseRotation);
             } else {
                 body.applyMatrix(clockwiseRotation);
             }
         } else {
-            body.applyMatrix(VectorMath.getRotationMatrixFromAngle(-playerMouseAngle));
+            body.applyMatrix(VectorMath.getRotationMatrixFromAngle(-targetAngle));
         }
     }
     private void changeVelocity(){
-        velocity.changeX(thrust * direction.getUnitX());
-        velocity.changeY(thrust * direction.getUnitY());
-        velocity.updateLength();
+        currentVelocity.changeX(thrust * direction.getUnitX());
+        currentVelocity.changeY(thrust * direction.getUnitY());
+        currentVelocity.updateLength();
     }
     private void applyDrag(){
-        velocity.scaleBy(dragCoefficient);
+        currentVelocity.scaleBy(dragCoefficient);
     }
 
     public Vector getPosition(){return position;}
     public String toString(){
-        return "POSITION:\n" + position.toString() + "\nVELOCITY:\n" + velocity.toString();
+        return "POSITION:\n" + position.toString() + "\nVELOCITY:\n" + currentVelocity.toString();
     }
 }
