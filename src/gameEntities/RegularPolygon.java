@@ -9,14 +9,12 @@ public class RegularPolygon {
     protected Vector[] vertices;
     int[][] drawableVertices;
     int vertexCount;
-    private float radius;
 
     public RegularPolygon(Vector position, float radius, int vertexCount){
         this.position = position;
         this.vertexCount = vertexCount;
         vertices = new Vector[vertexCount];
         drawableVertices = new int[2][vertexCount];
-        this.radius = radius;
         float interiorAngle = (float) (2 * Math.PI / vertexCount);
 
         for (int i = 0; i < vertexCount; i++){

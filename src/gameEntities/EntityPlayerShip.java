@@ -19,11 +19,13 @@ public class EntityPlayerShip extends EntityGeneric {
     private Matrix counterClockwiseRotation;
 
     public EntityPlayerShip(MouseInputState input){
+        super(new Vector(300, 300), new Vector(0,0), 20, 1);
         this.input = input;
         this.clockwiseRotation = VectorMath.getRotationMatrixFromAngle(maxRotationStep);
         this.counterClockwiseRotation = VectorMath.getRotationMatrixFromAngle(-maxRotationStep);
         this.body = new RegularPolygon(position,collisionRadius,5);
-        this.direction = body.vertices[0];
+        this.direction = body.getDirection();
+        this.position.addVector(new Vector(100, -100));
     }
     @Override
     public void draw(Graphics2D g2) {
@@ -42,7 +44,7 @@ public class EntityPlayerShip extends EntityGeneric {
         if (currentVelocity.getLength() > terminalVelocity){
             currentVelocity.scaleTo(terminalVelocity);
         }
-        position.addVector(currentVelocity);
+        super.update();
     }
 
     private void rotate(Vector target){
@@ -66,7 +68,6 @@ public class EntityPlayerShip extends EntityGeneric {
         currentVelocity.scaleBy(dragCoefficient);
     }
 
-    public Vector getPosition(){return position;}
     public String toString(){
         return "POSITION:\n" + position.toString() + "\nVELOCITY:\n" + currentVelocity.toString();
     }
