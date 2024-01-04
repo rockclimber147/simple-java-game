@@ -19,7 +19,7 @@ public class EntityPlayerShip extends EntityGeneric {
     private Matrix counterClockwiseRotation;
 
     public EntityPlayerShip(MouseInputState input){
-        super(new Vector(300, 300), new Vector(0,0), 20, 1);
+        super(new Vector(300, 300), new Vector(0,0), 20, 1, 1000);
         this.input = input;
         this.clockwiseRotation = VectorMath.getRotationMatrixFromAngle(maxRotationStep);
         this.counterClockwiseRotation = VectorMath.getRotationMatrixFromAngle(-maxRotationStep);

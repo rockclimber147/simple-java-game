@@ -67,6 +67,10 @@ public class Vector {
         this.y = y;
     }
 
+    public Vector clone(){
+        return new Vector(x, y);
+    }
+
     public String toString(){
         return "x: " + x + "\ny: " + y + "\nlength: " + length;
     }
